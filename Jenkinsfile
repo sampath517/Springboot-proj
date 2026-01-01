@@ -15,5 +15,16 @@ pipeline {
                 }
             }
         }
+
+
+        stage('Docker Build') {
+    steps {
+        script {
+            // Build Docker image
+            bat 'docker build -t my-spring-app:latest .'
+        }
+    }
+}
+
     }
 }
