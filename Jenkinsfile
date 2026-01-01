@@ -10,7 +10,9 @@ pipeline {
 
         stage('Build') {
             steps {
-                bat 'mvn clean install'
+                dir('Mini_project-crudOperation_paging') {
+                    bat 'mvn clean install'
+                }
             }
         }
     }
