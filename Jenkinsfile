@@ -10,7 +10,9 @@ pipeline {
 
         stage('Build') {
             steps {
-                bat 'mvn clean install'
+                dir('spring-web') {     // 👈 folder containing pom.xml
+                    bat 'mvn clean install'
+                }
             }
         }
     }
