@@ -1,5 +1,14 @@
-FROM eclipse-temurin:17-jdk-alpine
-VOLUME /tmp
-ARG JAR_FILE=target/Mini_project-crudOperation-0.0.1-SNAPSHOT.war
-COPY ${JAR_FILE} app.war
-ENTRYPOINT ["java","-jar","/app.war"]
+FROM tomcat:9.0-jdk17
+
+# Remove default apps
+RUN rm -rf /usr/local/tomcat/webapps/*
+
+# Change Tomcat port from 8080 → 1122
+RUN sed -i 's/port="8080"/port="1122"/' /usr/local/tomcat/conf/server.xml
+
+# Copy WAR file
+COPY target/*.war /usr/local/tomcat/webapps/ROOT.war
+
+EXPOSE 1122
+
+CMD ["catalina.sh", "run"]
