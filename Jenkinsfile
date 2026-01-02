@@ -2,6 +2,7 @@ pipeline {
     agent any
 
     stages {
+
         stage('Checkout') {
             steps {
                 checkout scm
@@ -16,15 +17,12 @@ pipeline {
             }
         }
 
-
         stage('Docker Build') {
-    steps {
-        script {
-            // Build Docker image
-            bat 'docker build -t my-spring-app:latest .'
+            steps {
+                dir('Mini_project-crudOperation_paging') {
+                    bat 'docker build -t my-spring-app:latest .'
+                }
+            }
         }
-    }
-}
-
     }
 }
